@@ -1,0 +1,16 @@
+# Use base image
+FROM node:17-alpine
+
+
+# Run commands
+USER node
+
+RUN mkdir -p /home/node/app
+WORKDIR /home/node/app
+COPY --chown=node:node package.json .
+RUN npm i
+COPY --chown=node:node . .
+
+
+# Default start command
+CMD [ "npm", "run", "start" ]
